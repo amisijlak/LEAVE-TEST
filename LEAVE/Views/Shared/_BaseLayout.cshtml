@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Field Matrix</title>
+    <script src="~/lib/popper/umd/popper.min.js"></script>
+    
+    <link href="~/css/devextreme/bootstrap.min.css" rel="stylesheet" />
+
+    <link href="~/css/devextreme/dx.common.css" rel="stylesheet" />
+
+    <link href="~/css/devextreme/dx.light.css" rel="stylesheet" />
+
+    <link href="~/lib/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" />
+    <link href="~/lib/eonasdan-bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link href="~/lib/font-awesome/css/all.min.css" rel="stylesheet" />
+    <link href="~/css/glyphicons.css" rel="stylesheet" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    <script src="~/js/devextreme/jquery.js"></script>
+    <script src="~/js/devextreme/bootstrap.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"> LEAVE MGT</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" id="main-nav">
+                    <partial name="_LoginPartial" />
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @RenderSection("menu")
+                    }
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container @Html.Raw(User.Identity.IsAuthenticated?"main-container":"")">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <ol class="breadcrumb">
+                @if (ViewData["IsHomePage"] == null)
+                {
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                }
+                @RenderSection("Breadcrumb", false)
+                <li class="active">@ViewData["Title"]</li>
+            </ol>
+        }
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; @DateTime.Today.Year - Field Matrix v@(CONSTANTS.VERSION)
+        </div>
+    </footer>
+
+    <partial name="Controls/_SystemDialog" />
+    <partial name="_ValidationScriptsPartial" />
+
+    <script src="~/js/jquery.floatThead.min.js"></script>
+    <script src="~/lib/moment/moment.min.js"></script>
+    <script src="~/lib/bootstrap-select/js/bootstrap-select.min.js"></script>
+    <script src="~/lib/eonasdan-bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/lib/font-awesome/js/all.min.js" data-auto-replace-svg="false"></script>
+
+    <script src="~/js/app/services/postback-service.js" asp-append-version="true"></script>
+    <script src="~/js/app/services/crud-service.js" asp-append-version="true"></script>
+    <script src="~/js/app/components/datagrid-helper.js" asp-append-version="true"></script>
+    <script src="~/js/app/app-services.js" asp-append-version="true"></script>
+    <script src="~/js/app/app-components.js" asp-append-version="true"></script>
+    <script src="~/js/app/app-controls.js" asp-append-version="true"></script>
+    <script src="~/js/app/app-dialogs.js" asp-append-version="true"></script>
+    <script src="~/js/app/app-lookups.js" asp-append-version="true"></script>
+    <script src="~/js/app/app-watched-collection.js" asp-append-version="true"></script>
+    <script src="~/js/app/app-logic.js" asp-append-version="true"></script>
+    <script src="~/js/app/app.js" asp-append-version="true"></script>
+    <script src="~/js/template-manager.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+    <script type="text/javascript">
+        app.controls.SERVER_DATE_TODAY = new Date(@DateTime.Today.Year,@(DateTime.Today.Month-1),@DateTime.Today.Day);
+        $(function () {
+            app.initialize();
+        });
+       
+        function clearRelatedCombos(parentSelector, event) {
+            var found = false;
+            var callerId = $(event.target).attr("id");
+            var directDependant = null;
+
+            $(parentSelector).find("select.related,select.related-combo").each(function (i, d) {
+                if (!found) {
+                    if ($(d).attr("id") == callerId) {
+                        found = true;
+                    }
+                }
+                else {
+                    if (directDependant == null) directDependant = $(d);
+                    $(d).val('');
+                }
+            });
+
+            return directDependant;
+        }
+
+        function loadDependantCombos(parentSelector, selector, loadUrl) {
+            $("body").on("changed.bs.select", parentSelector + " " + selector, function (e) {
+                var dependant = clearRelatedCombos(parentSelector, e);
+                console.log("re");
+
+                if (dependant != null) {
+                    app.postToServer(loadUrl, { parentId: $(e.target).val() }, function (response) {
+                        dependant.find("option:not(:first-of-type)").remove();
+                        $(response).each(function (i, d) {
+                            dependant.append("<option value='" + d.value + "'>" + d.key + "</option>");
+                        });
+                        dependant.selectpicker("refresh");
+                    });
+                }
+            });
+        }
+
+        function postbackDependantCombos(parentSelector, selector) {
+            $("body").on("changed.bs.select", parentSelector + " " + selector, function (e) {
+                clearRelatedCombos(parentSelector, e);
+                $(e.target).closest("form").submit();
+            });
+        }
+    </script>
+</body>
+</html>

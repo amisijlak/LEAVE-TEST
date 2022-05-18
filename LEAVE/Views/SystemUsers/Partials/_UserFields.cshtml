@@ -1,0 +1,26 @@
+﻿@model ApplicationUser
+@inject IDbRepository repository
+<div class="col-sm">
+    @Html.CodeFieldControlWithLabel()
+    @if (Model.IsSuperUser())
+    {
+        @Html.HiddenFor(m => m.UserName)
+        @Html.DisplayWithLabelFor(m => m.UserName)
+    }
+    else
+    {
+        @Html.TextBoxWithLabelFor(m => m.UserName, new { @maxlength = "255", @required = "required" })
+    }
+    @Html.TextBoxWithLabelFor(m => m.FirstName, new { @maxlength = "255", @required = "required" })
+    @Html.TextBoxWithLabelFor(m => m.LastName, new { @maxlength = "255", @required = "required" })
+    @Html.TextBoxWithLabelFor(m => m.OtherName, new { @maxlength = "255" })
+</div>
+<div class="col-sm">
+    @Html.TextBoxWithLabelFor(m => m.Email, new { @maxlength = "255", @required = "required" })
+    @Html.TextBoxWithLabelFor(m => m.PhoneNumber, new { @maxlength = "20" })
+    @Html.DropDownListWithLabelFor(m => m.UserType, Html.GetLEAVEEnumSelectList<UserType>())
+    @Html.DropDownListWithLabelFor(m => m.InstitutionId, repository.Set<Institution>().ConvertCodedNumericModelToSelectList()
+   , "-N/A-")
+    @Html.DropDownListWithLabelFor(m => m.BranchId, repository.Set<GenericLookup>().Where(r=>r.LookupType == GenericLookupType.Branch)
+    .ConvertCodedNumericModelToSelectList(), "-N/A-")
+</div>

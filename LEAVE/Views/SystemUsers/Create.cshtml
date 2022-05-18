@@ -1,0 +1,64 @@
+﻿@model ApplicationUser
+@inject IDbRepository repository
+@{
+    ViewData["Title"] = "Create User";
+    Layout = "~/Views/Shared/_SettingsLayout.cshtml";
+}
+
+@section Breadcrumb{
+    <li>@Html.ActionLink("System Users", "Index")</li>
+}
+
+<div class="margin-bottom-10">
+    <a asp-action="Index" class="btn btn-info"><i class="fa fa-backward"></i> Back To List</a>
+</div>
+
+<h3>@ViewData["Title"]</h3>
+
+@Html.RenderSuccessMessageControl()
+
+<form>
+    @Html.HiddenFor(m => m.Id)
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <partial name="Partials/_UserFields" />
+                        <div class="col-sm">
+                            <h4>Roles</h4>
+                            <div class="table-responsive">
+                                <table class="table table-numbered" id="role-table">
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                <a href="javascript:void(0)" onclick="app.logic.addElementFromTemplateManager('row','#role-table>tbody')" class="tm-add-row">
+                                    <i class="fa fa-plus"></i> Add Role
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-right">
+                    @Html.RenderSaveButtonsControl(true)
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@Html.RenderReloadForm("Index", LEAVESaveButtonType.Save)
+@Html.RenderReloadForm("Create", LEAVESaveButtonType.Save_And_Continue)
+
+@section Scripts{
+    <script type="text/javascript">
+        $(function () {
+            app.controls.disableFormSubmission("Id");
+            app.logic.initializeSaveURL("@Url.Action("_Create")");
+            templateManager.loadTemplate("row", "@Url.Action("_GetUserRoleTemplate")");
+        });
+    </script>
+}

@@ -1,0 +1,10 @@
+﻿@model ISearchTerm
+
+<div class="@ViewData["_SearchTermContainerClass"]">
+    @*<div>
+        <label>Search Term</label>
+    </div>*@
+    <div>
+        <input type="text" asp-for="SearchTerm" placeholder="search...." maxlength="30" class="search-box" />
+    </div>
+</div>

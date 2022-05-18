@@ -1,0 +1,20 @@
+﻿@model string
+@{
+    var id = "reload-form" + (string)ViewData["_ReloadFormSuffix"];
+    var pageUrl = (bool)ViewData["ReloadFormUseAction"];
+}
+@*
+    Reload Form
+*@
+@if (!(bool)ViewData["ReloadFormUseAction"])
+{
+    <form asp-action="@Model" id="@Html.Raw(id)" method="get">
+        @Html.Hidden("SuccessMessage", "")
+    </form>
+}
+else
+{
+    <form action="@Model" id="@Html.Raw(id)" method="get">
+        @Html.Hidden("SuccessMessage", "")
+    </form>
+}

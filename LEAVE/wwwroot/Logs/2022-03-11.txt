@@ -1,0 +1,142 @@
+14:26:52|ExtractDataFromDataRow|Input string was not in a correct format.
+   at System.Number.ThrowOverflowOrFormatException(ParsingStatus status, TypeCode type)
+   at System.Number.ParseInt64(ReadOnlySpan`1 value, NumberStyles styles, NumberFormatInfo info)
+   at System.String.System.IConvertible.ToInt64(IFormatProvider provider)
+   at System.Convert.ChangeType(Object value, Type conversionType, IFormatProvider provider)
+   at LEAVE.DAL.BLL.IO.ImportExportService.ExtractDataFromDataRow[T](DataRow row, IValueFromDataRowCellConverter valueConverter) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\IO\ImportExportService.cs:line 77
+
+14:26:52|ExtractDataFromDataTable|Property DivisionId: Input string was not in a correct format.
+   at LEAVE.DAL.BLL.IO.ImportExportService.ExtractDataFromDataRow[T](DataRow row, IValueFromDataRowCellConverter valueConverter) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\IO\ImportExportService.cs:line 83
+   at LEAVE.DAL.BLL.IO.ImportExportService.ExtractDataFromDataTable[T](DataTable table, IValueFromDataRowCellConverter valueConverter, Int32 startRowIndex) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\IO\ImportExportService.cs:line 101
+
+14:26:52|ImportProducts|Row 2: Property DivisionId: Input string was not in a correct format.
+   at LEAVE.DAL.BLL.Data.LEAVE.DALRepository.ExecuteInNewTransaction(Action LogicToExecute) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\Data\LEAVE.DALRepository.cs:line 49
+   at LEAVE.DAL.BLL.Distributors.ProductService.ImportProducts(IFormFile formFile) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\Products\ProductService.cs:line 42
+
+14:28:56|ExtractDataFromDataRow|Input string was not in a correct format.
+   at System.Number.ThrowOverflowOrFormatException(ParsingStatus status, TypeCode type)
+   at System.Number.ParseInt64(ReadOnlySpan`1 value, NumberStyles styles, NumberFormatInfo info)
+   at System.String.System.IConvertible.ToInt64(IFormatProvider provider)
+   at System.Convert.ChangeType(Object value, Type conversionType, IFormatProvider provider)
+   at System.Convert.ChangeType(Object value, Type conversionType)
+   at LEAVE.DAL.BLL.IO.ImportExportService.ExtractDataFromDataRow[T](DataRow row, IValueFromDataRowCellConverter valueConverter) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\IO\ImportExportService.cs:line 77
+
+14:28:56|ExtractDataFromDataTable|Property DivisionId: Input string was not in a correct format.
+   at LEAVE.DAL.BLL.IO.ImportExportService.ExtractDataFromDataRow[T](DataRow row, IValueFromDataRowCellConverter valueConverter) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\IO\ImportExportService.cs:line 83
+   at LEAVE.DAL.BLL.IO.ImportExportService.ExtractDataFromDataTable[T](DataTable table, IValueFromDataRowCellConverter valueConverter, Int32 startRowIndex) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\IO\ImportExportService.cs:line 101
+
+14:29:04|ImportProducts|Row 2: Property DivisionId: Input string was not in a correct format.
+   at LEAVE.DAL.BLL.Data.LEAVE.DALRepository.ExecuteInNewTransaction(Action LogicToExecute) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\Data\LEAVE.DALRepository.cs:line 49
+   at LEAVE.DAL.BLL.Distributors.ProductService.ImportProducts(IFormFile formFile) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\Products\ProductService.cs:line 42
+
+14:40:05|ExtractDataFromDataRow|Input string was not in a correct format.
+   at System.Number.ThrowOverflowOrFormatException(ParsingStatus status, TypeCode type)
+   at System.Number.ParseInt64(ReadOnlySpan`1 value, NumberStyles styles, NumberFormatInfo info)
+   at System.String.System.IConvertible.ToInt64(IFormatProvider provider)
+   at System.Convert.ChangeType(Object value, Type conversionType, IFormatProvider provider)
+   at System.Convert.ChangeType(Object value, Type conversionType)
+   at LEAVE.DAL.BLL.IO.ImportExportService.ExtractDataFromDataRow[T](DataRow row, IValueFromDataRowCellConverter valueConverter) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\IO\ImportExportService.cs:line 77
+
+14:40:26|ExtractDataFromDataTable|Property DivisionId: Input string was not in a correct format.
+   at LEAVE.DAL.BLL.IO.ImportExportService.ExtractDataFromDataRow[T](DataRow row, IValueFromDataRowCellConverter valueConverter) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\IO\ImportExportService.cs:line 83
+   at LEAVE.DAL.BLL.IO.ImportExportService.ExtractDataFromDataTable[T](DataTable table, IValueFromDataRowCellConverter valueConverter, Int32 startRowIndex) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\IO\ImportExportService.cs:line 101
+
+14:40:26|ImportProducts|Row 2: Property DivisionId: Input string was not in a correct format.
+   at LEAVE.DAL.BLL.Data.LEAVE.DALRepository.ExecuteInNewTransaction(Action LogicToExecute) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\Data\LEAVE.DALRepository.cs:line 49
+   at LEAVE.DAL.BLL.Distributors.ProductService.ImportProducts(IFormFile formFile) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\Products\ProductService.cs:line 42
+
+14:42:50|ExtractDataFromDataRow|Input string was not in a correct format.
+   at System.Number.ThrowOverflowOrFormatException(ParsingStatus status, TypeCode type)
+   at System.Number.ParseInt64(ReadOnlySpan`1 value, NumberStyles styles, NumberFormatInfo info)
+   at System.String.System.IConvertible.ToInt64(IFormatProvider provider)
+   at System.Convert.ChangeType(Object value, Type conversionType, IFormatProvider provider)
+   at System.Convert.ChangeType(Object value, Type conversionType)
+   at LEAVE.DAL.BLL.IO.ImportExportService.ExtractDataFromDataRow[T](DataRow row, IValueFromDataRowCellConverter valueConverter) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\IO\ImportExportService.cs:line 77
+
+14:42:50|ExtractDataFromDataTable|Property DivisionId: Input string was not in a correct format.
+   at LEAVE.DAL.BLL.IO.ImportExportService.ExtractDataFromDataRow[T](DataRow row, IValueFromDataRowCellConverter valueConverter) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\IO\ImportExportService.cs:line 83
+   at LEAVE.DAL.BLL.IO.ImportExportService.ExtractDataFromDataTable[T](DataTable table, IValueFromDataRowCellConverter valueConverter, Int32 startRowIndex) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\IO\ImportExportService.cs:line 101
+
+14:42:50|ImportProducts|Row 2: Property DivisionId: Input string was not in a correct format.
+   at LEAVE.DAL.BLL.Data.LEAVE.DALRepository.ExecuteInNewTransaction(Action LogicToExecute) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\Data\LEAVE.DALRepository.cs:line 49
+   at LEAVE.DAL.BLL.Distributors.ProductService.ImportProducts(IFormFile formFile) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\Products\ProductService.cs:line 42
+
+14:47:29|ExtractDataFromDataRow|Input string was not in a correct format.
+   at System.Number.ThrowOverflowOrFormatException(ParsingStatus status, TypeCode type)
+   at System.Number.ParseInt64(ReadOnlySpan`1 value, NumberStyles styles, NumberFormatInfo info)
+   at System.String.System.IConvertible.ToInt64(IFormatProvider provider)
+   at System.Convert.ChangeType(Object value, Type conversionType, IFormatProvider provider)
+   at System.Convert.ChangeType(Object value, Type conversionType)
+   at LEAVE.DAL.BLL.IO.ImportExportService.ExtractDataFromDataRow[T](DataRow row, IValueFromDataRowCellConverter valueConverter) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\IO\ImportExportService.cs:line 77
+
+14:47:29|ExtractDataFromDataTable|Property DivisionId: Input string was not in a correct format.
+   at LEAVE.DAL.BLL.IO.ImportExportService.ExtractDataFromDataRow[T](DataRow row, IValueFromDataRowCellConverter valueConverter) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\IO\ImportExportService.cs:line 83
+   at LEAVE.DAL.BLL.IO.ImportExportService.ExtractDataFromDataTable[T](DataTable table, IValueFromDataRowCellConverter valueConverter, Int32 startRowIndex) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\IO\ImportExportService.cs:line 101
+
+14:47:29|ImportProducts|Row 2: Property DivisionId: Input string was not in a correct format.
+   at LEAVE.DAL.BLL.Data.LEAVE.DALRepository.ExecuteInNewTransaction(Action LogicToExecute) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\Data\LEAVE.DALRepository.cs:line 49
+   at LEAVE.DAL.BLL.Distributors.ProductService.ImportProducts(IFormFile formFile) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\Products\ProductService.cs:line 42
+
+16:18:37|ImportProducts|Tax Configuration [NIVEA] Not Found!
+   at LEAVE.DAL.BLLExtensionMethods.EnsureIsNotNULL(Object item, String CustomErrorMessage) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\Helpers\BLLExtensionMethods.cs:line 49
+   at LEAVE.DAL.BLL.Distributors.ProductImportConverter.GetDistributorId(IDbRepository repository, String propertyName, String Code) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\Products\ProductImportConverter.cs:line 51
+   at LEAVE.DAL.BLL.Distributors.ProductService.ExtractProductFromDto(ProductDto productDto) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\Products\ProductService.cs:line 122
+   at LEAVE.DAL.BLL.Distributors.ProductService.<>c__DisplayClass5_1.<ImportProducts>b__0() in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\Products\ProductService.cs:line 87
+
+16:18:37|ImportProducts|Tax Configuration [NIVEA] Not Found!
+   at LEAVE.DAL.BLL.Data.LEAVE.DALRepository.ExecuteInNewTransaction(Action LogicToExecute) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\Data\LEAVE.DALRepository.cs:line 49
+   at LEAVE.DAL.BLL.Distributors.ProductService.ImportProducts(IFormFile formFile) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\Products\ProductService.cs:line 75
+
+16:37:50|ImportProducts|Division [NIVEA] Not Found!
+   at LEAVE.DAL.BLLExtensionMethods.EnsureIsNotNULL(Object item, String CustomErrorMessage) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\Helpers\BLLExtensionMethods.cs:line 49
+   at LEAVE.DAL.BLL.Distributors.ProductImportConverter.GetDivisionId(IDbRepository repository, String propertyName, String Code) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\Products\ProductImportConverter.cs:line 59
+   at LEAVE.DAL.BLL.Distributors.ProductService.ExtractProductFromDto(ProductDto productDto) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\Products\ProductService.cs:line 122
+   at LEAVE.DAL.BLL.Distributors.ProductService.<>c__DisplayClass5_1.<ImportProducts>b__0() in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\Products\ProductService.cs:line 87
+
+16:37:50|ImportProducts|Division [NIVEA] Not Found!
+   at LEAVE.DAL.BLL.Data.LEAVE.DALRepository.ExecuteInNewTransaction(Action LogicToExecute) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\Data\LEAVE.DALRepository.cs:line 49
+   at LEAVE.DAL.BLL.Distributors.ProductService.ImportProducts(IFormFile formFile) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\Products\ProductService.cs:line 75
+
+16:38:54|ImportProducts|Tax Configuration [UG1] Not Found!
+   at LEAVE.DAL.BLLExtensionMethods.EnsureIsNotNULL(Object item, String CustomErrorMessage) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\Helpers\BLLExtensionMethods.cs:line 49
+   at LEAVE.DAL.BLL.Distributors.ProductImportConverter.GeTaxConfigId(IDbRepository repository, String propertyName, String Code) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\Products\ProductImportConverter.cs:line 67
+   at LEAVE.DAL.BLL.Distributors.ProductService.ExtractProductFromDto(ProductDto productDto) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\Products\ProductService.cs:line 123
+   at LEAVE.DAL.BLL.Distributors.ProductService.<>c__DisplayClass5_1.<ImportProducts>b__0() in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\Products\ProductService.cs:line 87
+
+16:38:54|ImportProducts|Tax Configuration [UG1] Not Found!
+   at LEAVE.DAL.BLL.Data.LEAVE.DALRepository.ExecuteInNewTransaction(Action LogicToExecute) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\Data\LEAVE.DALRepository.cs:line 49
+   at LEAVE.DAL.BLL.Distributors.ProductService.ImportProducts(IFormFile formFile) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\Products\ProductService.cs:line 75
+
+16:40:03|ImportProducts|File contains corrupted data.
+   at System.IO.Packaging.ZipPackage..ctor(Stream s, FileMode packageFileMode, FileAccess packageFileAccess)
+   at System.IO.Packaging.Package.Open(Stream stream, FileMode packageMode, FileAccess packageAccess)
+   at DocumentFormat.OpenXml.Packaging.OpenXmlPackage.OpenCore(Stream stream, Boolean readWriteMode)
+   at DocumentFormat.OpenXml.Packaging.SpreadsheetDocument.Open(Stream stream, Boolean isEditable, OpenSettings openSettings)
+   at DocumentFormat.OpenXml.Packaging.SpreadsheetDocument.Open(Stream stream, Boolean isEditable)
+   at ClosedXML.Excel.XLWorkbook.LoadSheets(Stream stream)
+   at ClosedXML.Excel.XLWorkbook.Load(Stream stream)
+   at ClosedXML.Excel.XLWorkbook..ctor(Stream stream, XLEventTracking eventTracking)
+   at ClosedXML.Excel.XLWorkbook..ctor(Stream stream)
+   at LEAVE.DAL.ExcelHelper.ExtractWorkbook(IFormFile uploadedFile) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\Helpers\ExcelHelper.cs:line 53
+   at LEAVE.DAL.BLL.Distributors.ProductService.ImportProducts(IFormFile formFile) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\Products\ProductService.cs:line 66
+
+16:40:40|ImportProducts|Unit Of Measure [PC] Not Found!
+   at LEAVE.DAL.BLLExtensionMethods.EnsureIsNotNULL(Object item, String CustomErrorMessage) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\Helpers\BLLExtensionMethods.cs:line 49
+   at LEAVE.DAL.BLL.Distributors.ProductImportConverter.GetUoMId(IDbRepository repository, String propertyName, String Code) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\Products\ProductImportConverter.cs:line 76
+   at LEAVE.DAL.BLL.Distributors.ProductService.ExtractProductFromDto(ProductDto productDto) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\Products\ProductService.cs:line 124
+   at LEAVE.DAL.BLL.Distributors.ProductService.<>c__DisplayClass5_1.<ImportProducts>b__0() in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\Products\ProductService.cs:line 87
+
+16:40:40|ImportProducts|Unit Of Measure [PC] Not Found!
+   at LEAVE.DAL.BLL.Data.LEAVE.DALRepository.ExecuteInNewTransaction(Action LogicToExecute) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\Data\LEAVE.DALRepository.cs:line 49
+   at LEAVE.DAL.BLL.Distributors.ProductService.ImportProducts(IFormFile formFile) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\Products\ProductService.cs:line 75
+
+16:40:48|ImportProducts|Unit Of Measure [PC] Not Found!
+   at LEAVE.DAL.BLLExtensionMethods.EnsureIsNotNULL(Object item, String CustomErrorMessage) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\Helpers\BLLExtensionMethods.cs:line 49
+   at LEAVE.DAL.BLL.Distributors.ProductImportConverter.GetUoMId(IDbRepository repository, String propertyName, String Code) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\Products\ProductImportConverter.cs:line 76
+   at LEAVE.DAL.BLL.Distributors.ProductService.ExtractProductFromDto(ProductDto productDto) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\Products\ProductService.cs:line 124
+   at LEAVE.DAL.BLL.Distributors.ProductService.<>c__DisplayClass5_1.<ImportProducts>b__0() in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\Products\ProductService.cs:line 87
+
+16:40:48|ImportProducts|Unit Of Measure [PC] Not Found!
+   at LEAVE.DAL.BLL.Data.LEAVE.DALRepository.ExecuteInNewTransaction(Action LogicToExecute) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\Data\LEAVE.DALRepository.cs:line 49
+   at LEAVE.DAL.BLL.Distributors.ProductService.ImportProducts(IFormFile formFile) in D:\Projects\nyumba pili\LEAVE.DAL-web\LEAVE.DAL.BLL\Products\ProductService.cs:line 75
+

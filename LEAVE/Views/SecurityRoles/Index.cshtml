@@ -1,0 +1,58 @@
+﻿@inject ISessionService sessionService
+@model LEAVE.DAL.Models.Security.RoleContainerModel
+@{
+    Layout = "~/Views/Shared/_SettingsLayout.cshtml";
+    ViewData["Title"] = "Security Roles";
+
+    var canCreate = sessionService.HasAccessToPermission(SecurityModule.Security, SecuritySubModule.SecurityRoles, SecuritySystemAction.CreateAndEdit);
+    var canDelete = sessionService.HasAccessToPermission(SecurityModule.Security, SecuritySubModule.SecurityRoles, SecuritySystemAction.Delete);
+}
+
+<h3>@ViewData["Title"]</h3>
+
+@Html.RenderSuccessMessageControl()
+
+<div class="margin-bottom-10">
+    @if (canCreate)
+    {
+        <a asp-action="Details" class="btn btn-info"><i class="fa fa-plus"></i> New Role</a>
+    }
+</div>
+
+<div class="col-sm-12 no-padding">
+    <table class="table table-bordered table-numbered">
+        <thead>
+            <tr>
+                <td>#.</td>
+                <th>Name</th>
+                <th>Code</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Roles)
+            {
+                <tr>
+                    <td></td>
+                    <th>@(item.Name)</th>
+                    <th></th>
+                    <td class="text-center">
+                        <a href="@Url.Action("Details", new { item.Id })"><i class="fa fa-edit"></i> Edit</a>
+                        @("|")
+                        <a href="@Url.Action("_Delete", new { item.Id })" class="text-danger"><i class="fa fa-trash"></i> Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@Html.RenderReloadForm("Index")
+
+@section Scripts{
+    <script type="text/javascript">
+        function ignoreSuperRole(e) {
+            return e.row.data.Name.toLowerCase() != "@CONSTANTS.SUPER_ROLE.ToLower()";
+        }
+    </script>
+}

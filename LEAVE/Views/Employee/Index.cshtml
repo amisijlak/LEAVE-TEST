@@ -1,0 +1,68 @@
+﻿@inject ISessionService sessionService
+@model LEAVE.DAL.Models.Settings.SettingsListModel
+@{
+    ViewData["Title"] = "Employees";
+    Layout = "~/Views/Shared/_SettingsLayout.cshtml";
+
+    var canCreate = sessionService.HasAccessToPermission(SecurityModule.Settings, SecuritySubModule.Employee, SecuritySystemAction.CreateAndEdit);
+    var canDelete = sessionService.HasAccessToPermission(SecurityModule.Settings, SecuritySubModule.Employee, SecuritySystemAction.Delete);
+}
+
+<h3>@ViewData["Title"]</h3>
+
+@Html.RenderSuccessMessageControl()
+
+<div class="margin-bottom-10">
+    @if (canCreate)
+    {
+        <a asp-action="Details" class="btn btn-info"><i class="fa fa-plus"></i> New Employee</a>
+    }
+</div>
+
+<div class="col-sm-12 no-padding">
+    <table class="table table-bordered table-numbered">
+        <thead>
+            <tr>
+                <td>#.</td>
+                <th>Emp Code</th>
+                <th>Full Name</th>
+                <th>Date Of Birth</th>
+                <th>Education</th>
+                <th>Position</th>
+                <th>Department</th>
+                <th>DateJoined</th>
+                <td>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Employees)
+            {
+                <tr>
+                    <td></td>
+                    <td>@(item.Code)</td>
+                    <td>@(item.GetFullName())</td>
+                    <td>@(item.DateOfBirth.FormatForDisplay())</td>
+                    <td>@(item.LevelOfEducation)</td>
+                    <td>@(item.Position.Name)</td>
+                    <td>@(item.Department.Name)</td>
+                    <td>@(item.DateJoined.FormatForDisplay())</td>
+                    <td class="text-center">
+                        <a href="@Url.Action("Details", new { item.Id })"><i class="fa fa-edit"></i> Edit</a>
+                        @("|")
+                        <a href="@Url.Action("_Delete", new { item.Id })" class=" text-danger"><i class="fa fa-trash"></i> Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+@Html.RenderReloadForm("Index")
+
+@section Scripts{
+    <script type="text/javascript">
+    </script>
+}
+

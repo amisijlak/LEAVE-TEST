@@ -1,0 +1,125 @@
+﻿@model RoleContainerModel
+@{
+    ViewData["Title"] = (Model.IsNewRecord ? "New" : "Edit") + " Role";
+    Layout = "~/Views/Shared/_SettingsLayout.cshtml";
+}
+
+@section Breadcrumb{
+    <li>@Html.ActionLink("Security Roles", "Index")</li>
+}
+
+<style>
+    .card ol > li {
+        margin-bottom: 20px;
+    }
+
+    .table-responsive {
+        height: 400px;
+    }
+</style>
+
+<div class="margin-bottom-10">
+    <a asp-action="Index" class="btn btn-info"><i class="fa fa-backward"></i> Back To List</a>
+</div>
+
+<h3>@ViewData["Title"]</h3>
+
+@Html.RenderSuccessMessageControl()
+
+<form>
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.IsNewRecord)
+
+    <div class="card">
+        <div class="card-body">
+            <div class="form-group">
+                <label>Role Name</label>
+                @Html.TextBoxFor(m => m.Name, new { @required = "required", @maxlength = "255" })
+            </div>
+            <div class="row">
+                @foreach (var module in Model.Permissions.Select(r => r.Module).Distinct().OrderBy(r => r.GetEnumName()).ToList())
+                {
+                    <div class="col-sm-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong>@Html.CheckBox("check-all", new { @class = "check-all" }) @module.GetEnumName()</strong>
+                            </div>
+                            <div class="card-body table-responsive">
+                                <ol>
+                                    @foreach (var submodule in Model.Permissions.Where(r => r.Module == module).Select(r => r.SubModule).Distinct()
+                                      .OrderBy(r => r.GetEnumName()).ToList())
+                                    {
+                                        <li>
+                                            <div>@submodule.GetEnumName()</div>
+                                            @foreach (var permission in Model.Permissions.Where(r => r.Module == module && r.SubModule == submodule)
+                                              .OrderBy(r => r.SystemAction.GetEnumName()).ToList())
+                                            {
+                                                <div class="watched-collection" wc-name="Permissions">
+                                                    @Html.CheckBox("Enabled", permission.Enabled)
+                                                    @Html.Hidden("Module", permission.Module)
+                                                    @Html.Hidden("SubModule", permission.SubModule)
+                                                    @Html.Hidden("Action", permission.SystemAction)
+                                                    @Html.Hidden("PermissionId", permission.PermissionId)
+                                                    @permission.SystemAction.GetEnumName()
+                                                </div>
+                                            }
+                                        </li>
+                                    }
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="card-footer text-right">
+            @Html.RenderSaveButtonsControl(true)
+        </div>
+    </div>
+</form>
+
+@Html.RenderReloadForm("Index", LEAVESaveButtonType.Save)
+@Html.RenderReloadForm("Details", LEAVESaveButtonType.Save_And_Continue)
+
+@section Scripts{
+    <script type="text/javascript">
+    $(function () {
+        app.controls.disableFormSubmission("Id");
+        app.logic.initializeSaveURL("@Url.Action("_Save")");
+
+        $(controllerCheckboxSelector).on("click", controllerCheckboxAction);
+        $(childCheckboxSelector).on("click", childCheckboxAction);
+
+        $(".card").each(function (i, d) {
+            $(d).find(childCheckboxSelector).eq(0).triggerHandler("click");
+        });
+    });
+
+    var controllerCheckboxSelector = "input.check-all";
+    var childCheckboxSelector = "input[type='checkbox']:not(.check-all)";
+
+    function childCheckboxAction() {
+        var root = $(this).closest(".card");
+        if (root.find(childCheckboxSelector + ":not(:checked)").length > 0) {
+            root.find(controllerCheckboxSelector).prop("checked", false);
+        }
+        else {
+            root.find(controllerCheckboxSelector).prop("checked", true);
+        }
+    }
+
+    function controllerCheckboxAction() {
+        var root = $(this).closest(".card");
+        if (root.find(controllerCheckboxSelector + ":checked").length > 0) {
+            root.find(childCheckboxSelector + ":not(:checked)").each(function (i, d) {
+                $(d).prop("checked", true);
+            });
+        }
+        else {
+            root.find(childCheckboxSelector + ":checked").each(function (i, d) {
+                $(d).prop("checked", false);
+            });
+        }
+    }
+    </script>
+}

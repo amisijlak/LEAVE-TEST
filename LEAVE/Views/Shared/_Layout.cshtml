@@ -1,0 +1,71 @@
+﻿@inject ISessionService sessionService
+@{
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+
+    var isSuperAdmin = sessionService.IsSuperAdmin();
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    @section Breadcrumb{
+        @RenderSection("Breadcrumb", false)
+    }
+
+    @section menu{
+
+        <ul class="navbar-nav flex-grow-1">
+            <li class="nav-item" id="menu-dashboard">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"><i class="fas fa-home"></i> HOME</a>
+            </li>
+            <li class="nav-item" id="menu-dashboard">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Index"><i class="fas fa-users"></i> EMPLOYEES</a>
+            </li>
+            <li class="nav-item" id="menu-dashboard">
+                <a class="nav-link text-dark" asp-area="" asp-controller="LeaveRequest" asp-action="Index"><i class="fas fa-home"></i> LEAVE REQUESTS</a>
+            </li>
+            <li class="nav-item dropdown" id="menu-settings">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-cogs"></i> Settings
+                </a>
+                <div class="dropdown-multi-div settings-options">
+                    @{
+                        var canManageUsers = sessionService.HasAccessToPermission(SecurityModule.Security, SecuritySubModule.SystemUsers, SecuritySystemAction.ViewList);
+                        var canManageRoles = sessionService.HasAccessToPermission(SecurityModule.Security, SecuritySubModule.SecurityRoles, SecuritySystemAction.ViewList);
+
+
+                        if (canManageRoles || canManageUsers)
+                        {
+                            <div class="dropdown-group">
+                                <span>User Settings</span>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    @if (canManageUsers)
+                                    {
+                                        <a class="dropdown-item" asp-area="" asp-controller="SystemUsers" asp-action="Index">Manage Users</a>
+                                    }
+                                    @if (canManageRoles)
+                                    {
+                                        <a class="dropdown-item" asp-area="" asp-controller="SecurityRoles" asp-action="Index">Manage Roles</a>
+                                        <div class="dropdown-divider"></div>
+
+                                        <a class="dropdown-item" href="@Url.Action("Index", "GenericLookup")">
+                                            Generic Lookups
+                                        </a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" asp-area="" asp-controller="Institutions" asp-action="Index">Institutions</a>
+
+                                    }
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </li>
+        </ul>
+    }
+}
+
+@RenderBody()
+
+@section Scripts{
+    @RenderSection("Scripts", false)
+}

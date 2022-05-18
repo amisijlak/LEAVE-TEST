@@ -1,0 +1,58 @@
+﻿@inject ISessionService sessionService
+@model LEAVE.DAL.Models.Settings.SettingsListModel
+@{
+    ViewData["Title"] = "Institutions";
+    Layout = "~/Views/Shared/_SettingsLayout.cshtml";
+
+    var canCreate = sessionService.HasAccessToPermission(SecurityModule.Settings, SecuritySubModule.Institutions, SecuritySystemAction.CreateAndEdit);
+    var canDelete = sessionService.HasAccessToPermission(SecurityModule.Settings, SecuritySubModule.Institutions, SecuritySystemAction.Delete);
+}
+
+<h3>@ViewData["Title"]</h3>
+
+@Html.RenderSuccessMessageControl()
+
+<div class="margin-bottom-10">
+    @if (canCreate)
+    {
+        <a asp-action="Details" class="btn btn-info"><i class="fa fa-plus"></i> New Institution</a>
+    }
+</div>
+
+<div class="col-sm-12 no-padding">
+    <table class="table table-bordered table-numbered">
+        <thead>
+            <tr>
+                <th>#.</th>
+                <th>Code</th>
+                <th>Name</th>
+                <th>IsActive</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td></td>
+                    <td>@(item.Code)</td>
+                    <th>@(item.Name)</th>
+                    <td>@(item.IsActive)</td>
+                    <td class="text-center">
+                        <a href="@Url.Action("Details", new { item.Id })"><i class="fa fa-edit"></i> Edit</a>
+                        @("|")
+                        <a href="@Url.Action("_Delete", new { item.Id })" class="text-danger"><i class="fa fa-trash"></i> Print</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@Html.RenderReloadForm("Index")
+
+@section Scripts{
+    <script type="text/javascript">
+    </script>
+}
+

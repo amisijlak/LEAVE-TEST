@@ -1,0 +1,19 @@
+﻿@model IErrorMessage
+@{
+
+    var message = Model?.ErrorMessage ?? this.Context.Request.Query["ErrorMessage"];
+}
+
+@if (!string.IsNullOrEmpty(message))
+{
+    <div class=" col-sm-6 no-padding">
+        <div class="alert alert-danger">
+            <a class="close" data-dismiss="alert" href="#" aria-hidden="true">&times;</a>
+            <b>Error</b>
+            <div>
+                @message
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+}

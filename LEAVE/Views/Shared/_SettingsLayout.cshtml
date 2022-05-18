@@ -1,0 +1,17 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Breadcrumb{ 
+    <li><a>Settings</a></li>
+    @RenderSection("Breadcrumb",false)
+}
+
+@RenderBody()
+
+@section Scripts{
+    @RenderSection("Scripts", false)
+    <script type="text/javascript">
+        app.controls.MENU_TO_ACTIVATE = "menu-settings";        
+    </script>
+}

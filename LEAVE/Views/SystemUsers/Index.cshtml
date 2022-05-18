@@ -1,0 +1,117 @@
+﻿@inject ISessionService sessionService
+@model LEAVE.DAL.Models.Security.SystemUsersListModel
+@{
+    ViewData["Title"] = "System Users";
+    Layout = "~/Views/Shared/_SettingsLayout.cshtml";
+
+    var canCreate = sessionService.HasAccessToPermission(SecurityModule.Security, SecuritySubModule.SystemUsers, SecuritySystemAction.CreateAndEdit);
+    var canDeactivate = sessionService.HasAccessToPermission(SecurityModule.Security, SecuritySubModule.SystemUsers, SecuritySystemAction.Deactivate);
+    var canActivate = sessionService.HasAccessToPermission(SecurityModule.Security, SecuritySubModule.SystemUsers, SecuritySystemAction.Activate);
+}
+
+<h3>@ViewData["Title"]</h3>
+
+@Html.RenderSuccessMessageControl()
+@Html.RenderErrorMessageControl()
+
+<div class="margin-bottom-10">
+    @if (canCreate)
+    {
+        <a asp-action="Create" class="btn btn-info"><i class="fa fa-plus"></i> New User</a>
+    }
+</div>
+
+<div class="col-sm-12 no-padding">
+    <table class="table table-bordered table table-numbered">
+        <thead>
+            <tr>
+                <td></td>
+                <th>FullName</th>
+                <th>Code</th>
+                <th>UserName</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Institution</th>
+                <th>User Type</th>
+                <th>Branch</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Users)
+            {
+            <tr>
+                <td></td>
+                <th>@(item.GetFullName())</th>
+                <td>@(item.Code)</td>
+                <td>@(item.UserName)</td>
+                <td>@(item.Email)</td>
+                <td>@(item.PhoneNumber)</td>
+                <td>@(item.Institution?.Name)</td>
+                <td>@(item.UserType.GetEnumName())</td>
+                <td>@(item.Branch?.Name)</td>
+                <td class="text-center">
+                    <a href="@Url.Action("Edit", new { item.Id })"><i class="fa fa-edit"></i> Edit</a>
+                    @("|")
+                    <a href="@Url.Action("_Delete", new { item.Id })" class="text-danger"><i class="fa fa-trash"></i> Delete</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@Html.RenderReloadForm("Index")
+
+<form id="reload-deactivate-form" asp-action="Index" method="get">
+    <input type="hidden" name="SuccessMessage" value="Successfully Deactivated User!" />
+</form>
+<form id="reload-activate-form" asp-action="Index" method="get">
+    <input type="hidden" name="SuccessMessage" value="Successfully Activated User!" />
+</form>
+
+@section Scripts{
+    <script type="text/javascript">
+        function ignoreSuperAdmin(e) {
+            return e.row.data.UserName.toLowerCase() != "@CONSTANTS.SUPER_USER.ToLower()";
+        }
+
+        function controlEditLink(e) {
+            return ignoreSuperAdmin(e)||(e.row.data.UserName.toLowerCase() == "@CONSTANTS.SUPER_USER.ToLower()" && isSuperUser);
+        }
+
+        function ifActivated(e) {
+            return ignoreSuperAdmin(e) && (e.row.data.LockoutEnd == null || e.row.data.LockoutEnd < currentDate);
+        }
+
+        function ifDeactivated(e) {
+            return ignoreSuperAdmin(e) && e.row.data.LockoutEnd > currentDate;
+        }
+
+        function deactivateUser(e) {
+            confirmMessage("Do you confirm Deactivating User '" + e.row.data.UserName + "'?", function () {
+                app.postToServer("@Url.Action("_Deactivate")", { Id: e.row.data.Id }, function (response) {
+                    if (response.success) {
+                        $("#reload-deactivate-form").submit();
+                    }
+                    else {
+                        error(response.errorMessage);
+                    }
+                });
+            });
+        }
+
+        function activateUser(e) {
+            confirmMessage("Do you confirm Activating User '" + e.row.data.UserName + "'?", function () {
+                app.postToServer("@Url.Action("_Activate")", { Id: e.row.data.Id }, function (response) {
+                    if (response.success) {
+                        $("#reload-activate-form").submit();
+                    }
+                    else {
+                        error(response.errorMessage);
+                    }
+                });
+            });
+        }
+    </script>
+}

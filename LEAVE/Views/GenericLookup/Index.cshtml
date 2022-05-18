@@ -1,0 +1,62 @@
+﻿@inject ISessionService sessionService
+@model LEAVE.DAL.Models.Settings.SettingsListModel
+@{
+    ViewData["Title"] = "Generic Lookups";
+    Layout = "~/Views/Shared/_SettingsLayout.cshtml";
+
+    var canCreate = sessionService.HasAccessToPermission(SecurityModule.Settings, SecuritySubModule.Institutions, SecuritySystemAction.CreateAndEdit);
+    var canDelete = sessionService.HasAccessToPermission(SecurityModule.Settings, SecuritySubModule.Institutions, SecuritySystemAction.Delete);
+}
+
+<h3>@ViewData["Title"]</h3>
+
+@Html.RenderSuccessMessageControl()
+
+<div class="margin-bottom-10">
+    @if (canCreate)
+    {
+        <a asp-action="Details" class="btn btn-info"><i class="fa fa-plus"></i> New Lookup</a>
+    }
+</div>
+
+<div class="col-sm-12 no-padding">
+    <table class="table table-bordered table-numbered">
+        <thead>
+            <tr>
+                <th>#.</th>
+                <th>Code</th>
+                <th>Name</th>
+                <th>LookupType</th>
+                <th>Description</th>
+                <td>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Lookups)
+            {
+                <tr>
+                    <td></td>
+                    <td>@(item.Code)</td>
+                    <td>@(item.Name)</td>
+                    <td>@(item.LookupType)</td>
+                    <td>@(item.Description)</td>
+                    <td>
+                        <a href="@Url.Action("Details", new { item.Id })"><i class="fa fa-edit"></i> Edit</a>
+                        @("|")
+                        <a href="@Url.Action("_Delete", new { item.Id })" class="text-danger"><i class="fa fa-trash"></i> Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+@Html.RenderReloadForm("Index")
+
+@section Scripts{
+    <script type="text/javascript">
+    </script>
+}
+

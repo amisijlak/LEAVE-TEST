@@ -1,0 +1,64 @@
+﻿@model LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+    ViewData["IsHomePage"] = true;
+}
+
+<style>
+    @@media (min-width:500px) and (min-height:500px){
+        .login-container {
+            position: absolute;
+            top: 30%;
+            width: 100%;
+            left: 0;
+        }
+
+        .login-sub-container {
+            border-left: 1px solid #DDD;
+        }
+    }
+</style>
+
+<div class="login-container">
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-md-8 align-middle">
+                <div class="card">
+                    <div class="card-body row">
+                        <div class="col-md-7 login-image" style="padding-top:10px;">
+                        </div>
+                        <div class="col-md-5 login-sub-container">
+                            <h4>System Login</h4>
+                            <hr />
+                            <form asp-action="Login">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <input asp-for="ReturnUrl" type="hidden" />
+                                <div class="form-group">
+                                    <label asp-for="UserName" class="control-label"></label>
+                                    <input asp-for="UserName" class="form-control full-width" autocomplete="off" />
+                                    <span asp-validation-for="UserName" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Password" class="control-label"></label>
+                                    <input asp-for="Password" class="form-control full-width" type="password" autocomplete="off" />
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <div>
+                                        <input type="submit" value="Login" class="btn btn-primary" />
+                                        <a href="@Url.Action("ForgotPassword")" class="float-right" style="margin-top:8px;">Forgot Password</a>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="clearfix"></div>

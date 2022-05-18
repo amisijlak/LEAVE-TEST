@@ -1,0 +1,135 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using LEAVE.DAL;
+using LEAVE.DAL.Security;
+using LEAVE.DAL.BLL.Security;
+using Hangfire;
+using LEAVE.DAL.BLL;
+using LEAVE.DAL.BLL.Implementations;
+
+namespace LEAVE.DAL
+{
+    public class Startup
+    {
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
+        public IConfiguration Configuration { get; }
+
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddDbContext<LEAVE.DALContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDatabaseDeveloperPageExceptionFilter();
+            services.AddIdentity<ApplicationUser, SecurityRole>(options =>
+             {
+                //options.SignIn.RequireConfirmedAccount = true;
+
+                // Lockout settings
+                options.Lockout.AllowedForNewUsers = true;
+                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                 options.Lockout.MaxFailedAccessAttempts = 5;
+
+                //simplify passwords
+                options.Password.RequireDigit = false;
+                 options.Password.RequireLowercase = false;
+                 options.Password.RequireNonAlphanumeric = false;
+                 options.Password.RequireUppercase = false;
+
+                 options.User.RequireUniqueEmail = true;
+
+                 options.Tokens.ProviderMap.Add("Default", new TokenProviderDescriptor(typeof(IUserTwoFactorTokenProvider<ApplicationUser>)));
+             })
+                .AddEntityFrameworkStores<LEAVE.DALContext>();
+
+            services.Configure<DataProtectionTokenProviderOptions>(o =>
+            {
+                o.Name = "Default";
+                o.TokenLifespan = TimeSpan.FromHours(1);
+            });
+
+            services.AddScoped<Microsoft.AspNetCore.Identity.IUserClaimsPrincipalFactory<ApplicationUser>, AppClaimsPrincipalFactory>();
+
+            services.AddScoped<IDbRepository, LEAVE.DALRepository>();
+            services.AddScoped<ISessionService, SessionService>();
+            services.AddScoped<ILEAVE.DALLogger, LEAVE.DALLogger>();
+            services.AddScoped<ISecurityService, SecurityService>();
+            services.AddSingleton<IImportExportService, ImportExportService>();
+
+            services.AddHangfire(opt => opt.UseSqlServerStorage(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddHangfireServer();
+
+            //configure email sender
+            var emailSettings = Configuration.GetSection("EmailSettings");
+            services.AddSingleton(typeof(IEmailSender)
+                , new EmailSender(emailSettings.GetValue<bool>("Enabled"),
+                emailSettings.GetValue<string>("SmtpHost"),
+                emailSettings.GetValue<int>("SmtpPort"),
+                emailSettings.GetValue<bool>("UseSsl"),
+                emailSettings.GetValue<string>("Username"),
+                emailSettings.GetValue<string>("Password")));
+
+            services.AddControllersWithViews();
+            services.AddRazorPages();
+        }
+
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, UserManager<ApplicationUser> userManager, RoleManager<SecurityRole> roleManager)
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+                app.UseMigrationsEndPoint();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+
+            app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapAreaControllerRoute(name: "areas", "areas", pattern: "{area:exists}/{controller=Default}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
+            });
+
+            var services = app.ApplicationServices.GetService<IServiceScopeFactory>();
+            var context = services.CreateScope().ServiceProvider.GetRequiredService<LEAVE.DALContext>();
+            context.Database.Migrate();
+
+            IdentityDataInitializer.SeedData(userManager, roleManager);
+
+            // The rest of the hangfire config as usual.
+            //app.UseHangfireServer();
+            app.UseHangfireDashboard("/hangfire", new DashboardOptions { Authorization = new[] { new HangfireAuthorizationFilter() } });
+
+            LEAVE.DALLogger.RegisterMaintenanceTask();
+        }
+    }
+}

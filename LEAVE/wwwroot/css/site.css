@@ -1,0 +1,503 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+}
+
+/* Provide sufficient contrast against white background */
+a {
+    color: #0366d6;
+}
+
+.btn-info {
+    color: #fff;
+    background-color: #FA4B32;
+    border-color: #6C0009;
+}
+
+    .btn-info:hover, .btn-info:active {
+        background-color: #c73c28;
+    }
+
+.btn-primary {
+    color: #fff;
+    background-color: #96020e;
+    border-color: #6C0009;
+}
+
+    .btn-primary:hover, .btn-primary:active {
+        background-color: #6C0009;
+    }
+
+    .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+        color: #fff;
+        background-color: #1b6ec2;
+        border-color: #1861ac;
+    }
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    font-size: 13px !important;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.border-top {
+    border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    background-color: #EEE;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
+}
+
+.main-container{
+    background-color:#FFF;
+    padding-top:20px;
+    margin-top:-20px;
+    border:1px solid #DDD;
+    border-radius:4px;
+    min-height:400px;
+}
+
+#main-nav li.nav-item, .navbar-brand {
+    border-bottom: 2px solid transparent;
+}
+
+    #main-nav li.nav-item > a, .navbar-brand{
+        color: #6C0009 !important;
+    }
+
+        #main-nav li.nav-item.active, #main-nav li.nav-item:hover, .navbar-brand:hover {
+            border-bottom-color: #FA4B32;
+        }
+
+        #main-nav li.nav-item:hover:not(.active) {
+            border-bottom-color: #FA4B32;
+        }
+
+.navbar .dropdown-menu {
+    background-color: #FFF;
+    min-width: 250px;
+    z-index: 2000;
+}
+
+    .navbar .dropdown-menu .nav-link {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    .navbar .dropdown-menu .dropdown-divider {
+        margin-top: 2px;
+        margin-bottom: 2px;
+    }
+
+li > .dropdown-multi-div {
+    display: none;
+    position: absolute;
+    background-color: #e8c3c6;
+    padding: 1px;
+    z-index: 2000;
+    white-space: nowrap;
+    margin-top: 0px;
+}
+
+li.show > .dropdown-multi-div, li.show > .dropdown-multi-div .dropdown-menu {
+    display: block;
+}
+
+.dropdown-multi-div > .dropdown-group {
+    min-width: 150px;
+    display: inline-table;
+    border-right: 1px dotted #777;
+}
+
+.dropdown-multi-div .dropdown-menu {
+    position: unset !important;
+    min-width: unset !important;
+}
+
+.dropdown-multi-div ul {
+    list-style: none;
+    /*padding: 1px;*/
+}
+
+.dropdown-multi-div li {
+    margin-bottom: 1px;
+    margin-top: 1px;
+}
+
+.dropdown-multi-div a {
+    width: 100%;
+    display: block;
+    padding: 4px 20px !important;
+    border-right-width: 0px !important;
+    border-top:1px solid transparent;
+    border-bottom:1px solid transparent;
+}
+
+    .dropdown-multi-div a:hover {
+        text-decoration: none;
+        background-color: #efa89d;
+        border-top-color: #FA4B32;
+        border-bottom-color: #FA4B32;
+    }
+
+.dropdown-multi-div .dropdown-divider{
+    border-color:#000 !important;
+}
+
+.dropdown-multi-div span {
+    color: #000;
+    padding-left: 6px;
+}
+
+.dropdown-multi-div .divider {
+    height: 1px;
+}
+
+.login-image{
+    background-image:url('../images/index.jpg');
+    background-repeat:no-repeat;
+    background-position-x:center;
+    background-position-y: center;
+    background-size:90% auto;
+}
+/*
+CONTROLS
+============
+    */
+input:not(.full-width):not(.dx-texteditor-input),
+select:not(.full-width) {
+    max-width: 280px;
+}
+
+.bootstrap-select input.form-control {
+    max-width: unset !important;
+}
+
+textarea {
+    resize: both !important;
+    border: 1px solid #CCC;
+    border-radius: 3px;
+    padding: 10px;
+    width: 100%;
+}
+
+    textarea:not(.full-width) {
+        width: 280px;
+    }
+
+.search-box {
+    width: 300px;
+}
+
+.form-control {
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+    height: inherit !important;
+    /*font-size: 12px;*/
+}
+
+.form-group > label {
+    display: block !important;
+}
+
+.btn {
+    /*font-size: 12px;*/
+    border-style: none;
+    padding: 4px 12px !important;
+    box-shadow: 1px 1px 1px 0px #CCC;
+    min-width: 60px;
+}
+
+.error-message{
+    color:crimson;
+    font-style:italic;
+}
+
+.busy-container{
+    /*
+        Represents a container with a busy animation
+    */
+}
+
+/*
+    MARGINS
+    =========
+*/
+.margin-bottom-10 {
+    margin-bottom: 10px;
+}
+
+.margin-top-10 {
+    margin-top: 10px;
+}
+
+.card {
+    margin-bottom: 20px;
+}
+
+
+/*
+    Tables
+    ===================
+*/
+.table-responsive {
+    overflow: auto;
+}
+
+    .table-responsive:not(.can-grow) {
+        max-height: 400px;
+    }
+
+.table {
+    background-color: white;
+}
+
+    .table th, .table td {
+        padding: 5px !important;
+    }
+
+.table-header-fixed > thead > tr {
+    background-color: #FFF;
+    white-space: nowrap;
+}
+
+.vertical-align-middle, tr.vertical-align-middle td, tr.vertical-align-middle th {
+    vertical-align: middle !important;
+}
+
+.table-numbered {
+    counter-reset: rowNo;
+}
+
+    .table-numbered > tbody > tr:not(.ignore) {
+        counter-increment: rowNo;
+    }
+
+        .table-numbered > tbody > tr:not(.ignore) > td:first-of-type::before {
+            content: counter(rowNo) '.';
+        }
+
+/*
+    WATCHED COLLECTION
+    ====================
+*/
+.watched-collection {
+}
+/*
+    TEMPLATE MANAGER
+    =====================
+*/
+.tm-add-row {
+}
+
+.tm-hide {
+    display: none;
+}
+
+.tm-info-window {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    text-align: center;
+    border: 1px solid #CCC;
+    padding: 10px 0px;
+    font-weight: bold;
+    background-color: #bf82a5;
+    font-style: italic;
+}
+
+/*
+    BOOTSTRAP-SELECT
+    =====================
+*/
+.bootstrap-select:not(.bs-container) {
+    width: 100% !important;
+}
+
+.display-inline .bootstrap-select:not(.bs-container) {
+    min-width: 200px;
+}
+
+.bootstrap-select:not(.full-width):not(.bs-container) {
+    max-width: 280px !important;
+}
+
+.bootstrap-select.position-field:not(.bs-container) {
+    max-width: 100px !important;
+}
+
+.bootstrap-select.project-combo:not(.bs-container) {
+    width: 300px !important;
+}
+
+.bootstrap-select .btn {
+    border: 1px solid #CCC;
+    box-shadow: none;
+}
+
+.bootstrap-select .dropdown-menu.open, .dropdown-menu.show {
+    z-index: 1002;
+}
+
+.input-validation-error {
+    border-color: crimson;
+}
+
+.error, .field-validation-error {
+    color: crimson;
+}
+/*
+    FORMATTING
+    ==============
+*/
+.no-padding {
+    padding: 0px;
+}
+
+.pull-right {
+    float: right;
+}
+
+.display-inline {
+    display: inline-block;
+    vertical-align: bottom;
+}
+
+.filters .display-inline {
+    vertical-align: top;
+}
+
+.filters .filter-buttons {
+    padding-top: 22px;
+}
+
+.display-inline select, .display-inline input {
+    display: inline-block;
+}
+
+#dialog-icon {
+    font-size: 50px !important;
+}
+
+.dialog-message {
+    font-size: 14px !important;
+    margin-top: 10px;
+}
+
+.vertical-align-top, .vertical-align-top .display-inline {
+    vertical-align: top;
+}
+
+.bootstrap-datetimepicker-widget {
+    z-index: 1003 !important;
+}
+
+.remove-row {
+}
+
+.related-combo {
+}
+
+.require-commas {
+}
+
+.save-button {
+}
+
+.change-triggers-postback{
+
+}
+
+.item-checkbox{
+
+}
+
+.master-checkbox{
+
+}
+
+.text-bold{
+    font-weight:bold;
+}
+
+.current-area-title {
+    padding: 3px 8px;
+    border: 1px solid #ccfb56;
+    background-color: #ebfcbd;
+    display: inline-block;
+    border-radius: 4px;
+    color: #046935;
+    margin-bottom: 10px;
+}
+
+
+/*
+    DEVEXTREME OVERRIDES
+*/
+#gridContainer .dx-icon{
+    font-size:14px !important;
+}
+
+/*
+    TABS
+*/
+
+.tab-content {
+    padding: 20px;
+    border-left: 1px solid #DDD;
+    border-right: 1px solid #DDD;
+    border-bottom: 1px solid #DDD;
+}
+
+.nav-tabs > .nav-link {
+    margin-right: 5px;
+}
+
+    .nav-tabs > .nav-link.active {
+        box-shadow: 0px 1px 1px 1px #FFF;
+    }
+
+    .nav-tabs > .nav-link:not(.active) {
+        background-color: #17a2b8 !important;
+        color: #FFF !important;
+    }

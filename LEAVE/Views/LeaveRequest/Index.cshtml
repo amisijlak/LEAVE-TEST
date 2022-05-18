@@ -1,0 +1,64 @@
+﻿@inject ISessionService sessionService
+@model LEAVE.DAL.Models.Settings.SettingsListModel
+@{
+    ViewData["Title"] = "Leave Requests";
+    Layout = "~/Views/Shared/_SettingsLayout.cshtml";
+
+    var canCreate = sessionService.HasAccessToPermission(SecurityModule.Settings, SecuritySubModule.Leave_Request, SecuritySystemAction.CreateAndEdit);
+    var canDelete = sessionService.HasAccessToPermission(SecurityModule.Settings, SecuritySubModule.Leave_Request, SecuritySystemAction.Delete);
+}
+
+<h3>@ViewData["Title"]</h3>
+
+@Html.RenderSuccessMessageControl()
+
+<div class="margin-bottom-10">
+    @if (canCreate)
+    {
+        <a asp-action="Details" class="btn btn-info"><i class="fa fa-plus"></i> New Request</a>
+    }
+</div>
+
+<div class="col-sm-12 no-padding">
+    <table class="table table-bordered table-numbered">
+        <thead>
+            <tr>
+                <td>#.</td>
+                <th>Employee</th>
+                <th>StartDate</th>
+                <th>EndDate</th>
+                <th>Leave Type</th>
+                <th>Description</th>
+                <td>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.LeaveRequests)
+            {
+            <tr>
+                <td></td>
+                <td>@(item.Employee?.GetFullName())</td>
+                <td>@(item.StartDate.FormatForDisplay())</td>
+                <td>@(item.EndDate.FormatForDisplay())</td>
+                <td>@(item.LeaveType?.Name)</td>
+                <td>@(item.Description)</td>
+                <td class="text-center">
+                    <a href="@Url.Action("Details", new { item.Id })"><i class="fa fa-edit"></i> Edit</a>
+                    @("|")
+                    <a href="@Url.Action("_Delete", new { item.Id })" class=" text-danger"><i class="fa fa-trash"></i> Delete</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+@Html.RenderReloadForm("Index")
+
+@section Scripts{
+    <script type="text/javascript">
+    </script>
+}
+

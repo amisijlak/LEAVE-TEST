@@ -1,0 +1,15 @@
+﻿@model bool
+@if (Model)
+{
+    <div class="form-group">
+        <input type="button" value="Save" onclick="app.logic.saveRecord(this,@Html.Raw(LEAVESaveButtonType.Save.GetIntValue()))" class="btn btn-primary save-button" />
+        @(" | ")
+        <input type="button" value="Save & Continue" onclick="app.logic.saveRecord(this,@Html.Raw(LEAVESaveButtonType.Save_And_Continue.GetIntValue()))" class="btn btn-primary save-button" />
+    </div>
+}
+else
+{
+    <div class="form-group">
+        <input type="button" value="Save" onclick="app.logic.saveRecord(this)" class="btn btn-primary save-button" />
+    </div>
+}

@@ -1,0 +1,14 @@
+﻿@model UserRoleModel 
+@inject IDbRepository repository
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<tr class="watched-collection" wc-name="roles">
+    <td></td>
+    <td>
+        @Html.DropDownListWithoutLabelFor(m=>m.RoleId,repository.Set<SecurityRole>().ConvertNamedStringModelToSelectList(),"-select-",new { @required="required"})
+    </td>
+    <td class="text-center">
+        <a href="javascript:void(0)" class="remove-row"><i class="fa fa-trash text-danger"></i></a>
+    </td>
+</tr>
